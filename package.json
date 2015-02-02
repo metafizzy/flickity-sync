@@ -8,7 +8,7 @@
     "fizzy-ui-utils": "^0.1.0"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Open test/index.html in browser\" && exit 1"
   },
   "repository": {
     "type": "git",

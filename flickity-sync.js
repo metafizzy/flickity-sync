@@ -3,7 +3,10 @@
  * enable sync for Flickity
  */
 
+/*jshint browser: true, undef: true, unused: true, strict: true*/
+
 ( function( window, factory ) {
+  /*global define: false, module: false, require: false */
   'use strict';
   // universal module definition
 
