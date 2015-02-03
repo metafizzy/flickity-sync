@@ -29,7 +29,7 @@ $('.gallery-a').flickity({
   sync: 'gallery-b'
 });
 // only need to set sync on one of the Flickity galleries
-$('.gallery-b'.flickity();
+$('.gallery-b').flickity();
 ```
 
 ### Vanilla JS
