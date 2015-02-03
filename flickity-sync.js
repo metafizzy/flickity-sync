@@ -1,5 +1,5 @@
 /*!
- * Flickity sync v0.1.0
+ * Flickity sync v0.1.1
  * enable sync for Flickity
  */
 
@@ -13,7 +13,7 @@
   if ( typeof define == 'function' && define.amd ) {
     // AMD
     define( [
-      './flickity',
+      'flickity/js/flickity',
       'fizzy-ui-utils/utils'
     ], function( Flickity, utils ) {
       return factory( window, Flickity, utils );
@@ -22,7 +22,7 @@
     // CommonJS
     module.exports = factory(
       window,
-      require('/.flickity'),
+      require('flickity'),
       require('fizzy-ui-utils')
     );
   } else {
