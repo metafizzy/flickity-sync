@@ -13,7 +13,7 @@
   if ( typeof define == 'function' && define.amd ) {
     // AMD
     define( [
-      'flickity/js/flickity',
+      'flickity/js/index',
       'fizzy-ui-utils/utils'
     ], function( Flickity, utils ) {
       return factory( window, Flickity, utils );
@@ -27,7 +27,6 @@
     );
   } else {
     // browser global
-    window.Flickity = window.Flickity || {};
     window.Flickity = factory(
       window,
       window.Flickity,
