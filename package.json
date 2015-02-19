@@ -1,10 +1,10 @@
 {
   "name": "flickity-sync",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Enable sync for Flickity",
   "main": "flickity-sync.js",
   "dependencies": {
-    "flickity": "~0.2.0",
+    "flickity": ">=0.2.0 <0.4",
     "fizzy-ui-utils": "~0.1.0"
   },
   "scripts": {
