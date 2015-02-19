@@ -1,5 +1,5 @@
 /*!
- * Flickity sync v0.1.2
+ * Flickity sync v0.2.0
  * enable sync for Flickity
  */
 
@@ -87,7 +87,7 @@ Flickity.prototype._syncCompanion = function( companion ) {
       companion.select( index );
     }
   }
-  this.on( 'select', syncListener );
+  this.on( 'cellSelect', syncListener );
   // keep track of all synced flickities
   // hold on to listener to unsync
   this.syncers[ companion.guid ] = {
@@ -124,7 +124,7 @@ Flickity.prototype._unsync = function( companion ) {
 Flickity.prototype._unsyncCompanion = function( companion ) {
   var id = companion.guid;
   var syncer = this.syncers[ id ];
-  this.off( 'select', syncer.listener );
+  this.off( 'cellSelect', syncer.listener );
   delete this.syncers[ id ];
 };
 
