@@ -22,6 +22,8 @@ sync: document.querySelector('gallery-b')
 // set as an element
 ```
 
+[See demo on CodePen](http://codepen.io/desandro/pen/OPZJmE).
+
 ### jQuery
 
 ``` js
