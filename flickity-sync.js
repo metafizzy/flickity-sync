@@ -1,5 +1,5 @@
 /*!
- * Flickity sync v0.2.0
+ * Flickity sync v1.0.0
  * enable sync for Flickity
  */
 

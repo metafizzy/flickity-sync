@@ -57,7 +57,7 @@ var flktyB = new Flickity('.gallery-b');
 
 ## Install
 
-`flickity-sync.js` is included with the Flickity `pkgd.js` files. If you are using those, you do not need to install.
+`flickity-sync.js` is _not_ included with flickity.pkgd.js, so you'll need to add this file in addition.
 
 Bower: `bower install flickity-sync --save`
 
