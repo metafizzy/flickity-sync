@@ -4,7 +4,7 @@
   "description": "Enable sync for Flickity",
   "main": "flickity-sync.js",
   "dependencies": {
-    "flickity": "~1.0.0",
+    "flickity": "~1.2.1",
     "fizzy-ui-utils": "~1.0.0"
   },
   "devDependencies": {
