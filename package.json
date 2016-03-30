@@ -1,11 +1,11 @@
 {
   "name": "flickity-sync",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Enable sync for Flickity",
   "main": "flickity-sync.js",
   "dependencies": {
-    "flickity": "~1.0.0",
-    "fizzy-ui-utils": "~1.0.0"
+    "flickity": "^1.0.0",
+    "fizzy-ui-utils": "^1.0.0"
   },
   "scripts": {
     "test": "echo \"Open test/index.html in browser\" && exit 1"
