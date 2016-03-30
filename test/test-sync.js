@@ -2,11 +2,24 @@ test( 'sync', function( assert ) {
   'use strict';
 
   var flktyA = new Flickity( '#sync-a', {
-    sync: '#sync-b'
+    sync: '#sync-b',
+    arrowShape: {
+      x0: 15,
+      x1: 50, y1: 40,
+      x2: 55, y2: 35,
+      x3: 25
+    }
   });
 
   var elemB = document.querySelector('#sync-b');
-  var flktyB = new Flickity( elemB );
+  var flktyB = new Flickity( elemB, {
+    arrowShape: {
+      x0: 15,
+      x1: 50, y1: 40,
+      x2: 55, y2: 35,
+      x3: 25
+    }
+  });
 
   // HACK do async because syncing is async
   var done = assert.async();
