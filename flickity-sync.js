@@ -1,40 +1,34 @@
 /*!
- * Flickity sync v1.0.1
+ * Flickity sync v2.0.0
  * enable sync for Flickity
  */
 
 /*jshint browser: true, undef: true, unused: true, strict: true*/
 
 ( function( window, factory ) {
-  /*global define: false, module: false, require: false */
-  'use strict';
   // universal module definition
-
+  /*jshint strict: false */ /*globals define, module, require */
   if ( typeof define == 'function' && define.amd ) {
     // AMD
     define( [
       'flickity/js/index',
       'fizzy-ui-utils/utils'
-    ], function( Flickity, utils ) {
-      return factory( window, Flickity, utils );
-    });
-  } else if ( typeof exports == 'object' ) {
+    ], factory );
+  } else if ( typeof module == 'object' && module.exports ) {
     // CommonJS
     module.exports = factory(
-      window,
       require('flickity'),
       require('fizzy-ui-utils')
     );
   } else {
     // browser global
     window.Flickity = factory(
-      window,
       window.Flickity,
       window.fizzyUIUtils
     );
   }
 
-}( window, function factory( window, Flickity, utils ) {
+}( window, function factory( Flickity, utils ) {
 
 'use strict';
 
@@ -87,7 +81,7 @@ Flickity.prototype._syncCompanion = function( companion ) {
       companion.select( index );
     }
   }
-  this.on( 'cellSelect', syncListener );
+  this.on( 'select', syncListener );
   // keep track of all synced flickities
   // hold on to listener to unsync
   this.syncers[ companion.guid ] = {
@@ -124,7 +118,7 @@ Flickity.prototype._unsync = function( companion ) {
 Flickity.prototype._unsyncCompanion = function( companion ) {
   var id = companion.guid;
   var syncer = this.syncers[ id ];
-  this.off( 'cellSelect', syncer.listener );
+  this.off( 'select', syncer.listener );
   delete this.syncers[ id ];
 };
 

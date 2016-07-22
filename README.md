@@ -5,20 +5,20 @@ Enables `sync` option for [Flickity](http://flickity.metafizzy.co/)
 You can sync two Flickity galleries. Whenever one selects a cell, its companion will select its cell of the same index.
 
 ``` html
-<div class="gallery gallery-a">
+<div class="carousel carousel-a">
   ...
 </div>
-<div class="gallery gallery-b">
+<div class="carousel carousel-b">
   ...
 </div>
 ```
 
 ``` js
 // options
-sync: 'gallery-b'
+sync: 'carousel-b'
 // set as a selector string
 
-sync: document.querySelector('gallery-b')
+sync: document.querySelector('carousel-b')
 // set as an element
 ```
 
@@ -27,30 +27,30 @@ sync: document.querySelector('gallery-b')
 ### jQuery
 
 ``` js
-$('.gallery-a').flickity({
-  sync: 'gallery-b'
+$('.carousel-a').flickity({
+  sync: 'carousel-b'
 });
 // only need to set sync on one of the Flickity galleries
-$('.gallery-b').flickity();
+$('.carousel-b').flickity();
 ```
 
 ### Vanilla JS
 
 ``` js
-var flktyA = new Flickity( '.gallery-a', {
-  sync: '.gallery-b'
+var flktyA = new Flickity( '.carousel-a', {
+  sync: '.carousel-b'
 });
-var flktyB = new Flickity('.gallery-b');
+var flktyB = new Flickity('.carousel-b');
 ```
 
 ### HTML
 
 ``` html
-<div class="gallery gallery-a js-flickity"
-  data-flickity-options='{ "sync": ".gallery-b" }'>
+<div class="carousel carousel-a js-flickity"
+  data-flickity-options='{ "sync": ".carousel-b" }'>
   ...
 </div>
-<div class="gallery gallery-b js-flickity">
+<div class="carousel carousel-b js-flickity">
   ...
 </div>
 ```
@@ -67,10 +67,10 @@ npm: `npm install flickity-sync`
 
 ``` js
 requirejs( [ 'path/to/flickity-sync' ], function( Flickity ) {
-  var flktyA = new Flickity( '.gallery-a', {
-    sync: '.gallery-b'
+  var flktyA = new Flickity( '.carousel-a', {
+    sync: '.carousel-b'
   });
-  var flktyB = new Flickity('.gallery-b')
+  var flktyB = new Flickity('.carousel-b')
 });
 ```
 
@@ -79,10 +79,10 @@ requirejs( [ 'path/to/flickity-sync' ], function( Flickity ) {
 ``` js
 var Flickity = require('flickity-sync');
 
-var flktyA = new Flickity( '.gallery-a', {
-  sync: '.gallery-b'
+var flktyA = new Flickity( '.carousel-a', {
+  sync: '.carousel-b'
 });
-var flktyB = new Flickity('.gallery-b');
+var flktyB = new Flickity('.carousel-b');
 ```
 
 ---
