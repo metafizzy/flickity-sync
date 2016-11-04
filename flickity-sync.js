@@ -1,5 +1,5 @@
 /*!
- * Flickity sync v2.0.0
+ * Flickity sync v2.0.1
  * enable sync for Flickity
  */
 
@@ -32,6 +32,17 @@
 
 'use strict';
 
+function normalizeElements(elems) {
+  if (typeof elems === "string") {
+    elems = elems.split(',').map(function (selector) {
+    	return selector.trim();
+    });
+  } else if (!Array.isArray(elems)) {
+    elems = [elems];
+  }
+  return elems;
+}
+
 // -------------------------- sync prototype -------------------------- //
 
 // Flickity.defaults.sync = false;
@@ -58,15 +69,19 @@ Flickity.prototype._createSync = function() {
  * sync
  * @param {Element} or {String} elem
  */
-Flickity.prototype.sync = function( elem ) {
-  elem = utils.getQueryElement( elem );
-  var companion = Flickity.data( elem );
-  if ( !companion ) {
-    return;
-  }
-  // two hearts, that beat as one
-  this._syncCompanion( companion );
-  companion._syncCompanion( this );
+Flickity.prototype.sync = function( elems ) {
+	var self = this;
+  elems = normalizeElements(elems);
+  elems.forEach(function (elem) {
+  	elem = utils.getQueryElement( elem );
+    var companion = Flickity.data( elem );
+    if ( !companion ) {
+      return;
+    }
+    // many hearts, that beat as one
+    self._syncCompanion( companion );
+    companion._syncCompanion( self );
+  });
 };
 
 /**
@@ -84,6 +99,7 @@ Flickity.prototype._syncCompanion = function( companion ) {
   this.on( 'select', syncListener );
   // keep track of all synced flickities
   // hold on to listener to unsync
+  console.log("GUID", companion.guid);
   this.syncers[ companion.guid ] = {
     flickity: companion,
     listener: syncListener
@@ -94,10 +110,14 @@ Flickity.prototype._syncCompanion = function( companion ) {
  * unsync
  * @param {Element} or {String} elem
  */
-Flickity.prototype.unsync = function( elem ) {
-  elem = utils.getQueryElement( elem );
-  var companion = Flickity.data( elem );
-  this._unsync( companion );
+Flickity.prototype.unsync = function( elems ) {
+  var self = this;
+  elems = normalizeElements(elems);
+  elems.forEach(function (elem) {
+    elem = utils.getQueryElement( elem );
+    var companion = Flickity.data( elem );
+    self._unsync( companion );
+  });
 };
 
 /**

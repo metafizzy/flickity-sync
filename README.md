@@ -14,12 +14,11 @@ You can sync two Flickity galleries. Whenever one selects a cell, its companion 
 ```
 
 ``` js
-// options
-sync: 'carousel-b'
-// set as a selector string
-
-sync: document.querySelector('carousel-b')
-// set as an element
+var options = {
+  sync: '.carousel-b', // Selector String
+  sync: '.carousel-b, .carousel-c', // Multiple elements in a selector
+  sync: document.querySelector('carousel-b'), // DOM Node
+}
 ```
 
 [See demo on CodePen](http://codepen.io/desandro/pen/OPZJmE).
@@ -28,7 +27,7 @@ sync: document.querySelector('carousel-b')
 
 ``` js
 $('.carousel-a').flickity({
-  sync: 'carousel-b'
+  sync: '.carousel-b'
 });
 // only need to set sync on one of the Flickity galleries
 $('.carousel-b').flickity();
