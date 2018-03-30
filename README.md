@@ -1,8 +1,8 @@
 # Flickity sync
 
-Enables `sync` option for [Flickity](http://flickity.metafizzy.co/)
+Enables `sync` option for [Flickity](https://flickity.metafizzy.co/)
 
-You can sync two Flickity galleries. Whenever one selects a cell, its companion will select its cell of the same index.
+You can sync two Flickity carousels. Whenever one selects a cell, its companion will select its matching cell of the same index.
 
 ``` html
 <div class="carousel carousel-a">
@@ -15,20 +15,42 @@ You can sync two Flickity galleries. Whenever one selects a cell, its companion 
 
 ``` js
 // options
-sync: 'carousel-b'
+sync: '.carousel-b'
 // set as a selector string
 
-sync: document.querySelector('carousel-b')
+sync: document.querySelector('.carousel-b')
 // set as an element
 ```
 
-[See demo on CodePen](http://codepen.io/desandro/pen/OPZJmE).
+[See demo on CodePen](https://codepen.io/desandro/pen/OPZJmE).
+
+## Install
+
+Add `flickity-sync.js` to your scripts.
+
+### Download
+
++ [flickity-sync.js](https://unpkg.com/flickity-sync@2/flickity-sync.js)
+
+### CDN
+
+``` html
+<script src="https://unpkg.com/flickity-sync@2/flickity-sync.js"></script>
+```
+
+### Package managers
+
+npm: `npm install flickity-sync`
+
+Bower: `bower install flickity-sync`
+
+## Usage
 
 ### jQuery
 
 ``` js
 $('.carousel-a').flickity({
-  sync: 'carousel-b'
+  sync: '.carousel-b'
 });
 // only need to set sync on one of the Flickity galleries
 $('.carousel-b').flickity();
@@ -46,22 +68,24 @@ var flktyB = new Flickity('.carousel-b');
 ### HTML
 
 ``` html
-<div class="carousel carousel-a js-flickity"
-  data-flickity-options='{ "sync": ".carousel-b" }'>
+<div class="carousel carousel-a" data-flickity='{ "sync": ".carousel-b" }'>
   ...
 </div>
-<div class="carousel carousel-b js-flickity">
+<div class="carousel carousel-b" data-flickity>
   ...
 </div>
 ```
 
-## Install
+### Webpack & Browserify
 
-`flickity-sync.js` is _not_ included with flickity.pkgd.js, so you'll need to add this file in addition.
+``` js
+var Flickity = require('flickity-sync');
 
-Bower: `bower install flickity-sync --save`
-
-npm: `npm install flickity-sync`
+var flktyA = new Flickity( '.carousel-a', {
+  sync: '.carousel-b'
+});
+var flktyB = new Flickity('.carousel-b');
+```
 
 ### RequireJS
 
@@ -74,17 +98,6 @@ requirejs( [ 'path/to/flickity-sync' ], function( Flickity ) {
 });
 ```
 
-### Browserify
-
-``` js
-var Flickity = require('flickity-sync');
-
-var flktyA = new Flickity( '.carousel-a', {
-  sync: '.carousel-b'
-});
-var flktyB = new Flickity('.carousel-b');
-```
-
 ---
 
-By [Metafizzy](http://metafizzy.co)
+By [Metafizzy 🌈🐻](https://metafizzy.co)
