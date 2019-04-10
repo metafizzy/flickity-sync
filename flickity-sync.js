@@ -1,5 +1,5 @@
 /*!
- * Flickity sync v2.0.0
+ * Flickity sync v2.0.1
  * enable sync for Flickity
  */
 
@@ -41,7 +41,6 @@ Flickity.createMethods.push('_createSync');
 Flickity.prototype._createSync = function() {
   this.syncers = {};
   var syncOption = this.options.sync;
-
   this.on( 'destroy', this.unsyncAll );
 
   if ( !syncOption ) {
@@ -74,19 +73,29 @@ Flickity.prototype.sync = function( elem ) {
  */
 Flickity.prototype._syncCompanion = function( companion ) {
   var _this = this;
-  function syncListener() {
+  function syncListenerSelect() {
     var index = _this.selectedIndex;
     // do not select if already selected, prevent infinite loop
     if ( companion.selectedIndex != index ) {
       companion.select( index );
     }
   }
-  this.on( 'select', syncListener );
+  this.on( 'select', syncListenerSelect );
+  
+  function syncListenerPointerDown() {
+    if ( !companion.options.autoPlay ) {
+      return;
+    }
+    companion.stopPlayer();
+  }
+  this.on( 'pointerDown', syncListenerPointerDown );
+  
   // keep track of all synced flickities
   // hold on to listener to unsync
   this.syncers[ companion.guid ] = {
     flickity: companion,
-    listener: syncListener
+    listenerSelect: syncListenerSelect,
+    listenerPointerDown: syncListenerPointerDown
   };
 };
 
@@ -118,7 +127,8 @@ Flickity.prototype._unsync = function( companion ) {
 Flickity.prototype._unsyncCompanion = function( companion ) {
   var id = companion.guid;
   var syncer = this.syncers[ id ];
-  this.off( 'select', syncer.listener );
+  this.off( 'select', syncer.listenerSelect );
+  this.off( 'pointerDown', syncer.listenerPointerDown );
   delete this.syncers[ id ];
 };
 
