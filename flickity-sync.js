@@ -90,6 +90,18 @@ Flickity.prototype._syncCompanion = function( companion ) {
   }
   this.on( 'pointerDown', syncListenerPointerDown );
   
+  // pause auto play on hover of companion
+  if ( companion.options.autoPlay && companion.options.pauseAutoPlayOnHover ) {
+    this.element.addEventListener( 'mouseenter', function() {
+      companion.pausePlayer();
+
+      _this.element.addEventListener( 'mouseleave', function _mouseleave() {
+        companion.unpausePlayer();
+        _this.element.removeEventListener( 'mouseleave', _mouseleave );
+      });
+    });
+  }
+
   // keep track of all synced flickities
   // hold on to listener to unsync
   this.syncers[ companion.guid ] = {
