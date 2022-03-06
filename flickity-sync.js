@@ -3,67 +3,51 @@
  * enable sync for Flickity
  */
 
-/*jshint browser: true, undef: true, unused: true, strict: true*/
-
 ( function( window, factory ) {
   // universal module definition
-  /*jshint strict: false */ /*globals define, module, require */
-  if ( typeof define == 'function' && define.amd ) {
-    // AMD
-    define( [
-      'flickity/js/index',
-      'fizzy-ui-utils/utils'
-    ], factory );
-  } else if ( typeof module == 'object' && module.exports ) {
+  if ( typeof module == 'object' && module.exports ) {
     // CommonJS
     module.exports = factory(
-      require('flickity'),
-      require('fizzy-ui-utils')
+        require('flickity'),
+        require('fizzy-ui-utils'),
     );
   } else {
     // browser global
-    window.Flickity = factory(
-      window.Flickity,
-      window.fizzyUIUtils
+    factory(
+        window.Flickity,
+        window.fizzyUIUtils,
     );
   }
 
-}( window, function factory( Flickity, utils ) {
-
-'use strict';
+}( typeof window != 'undefined' ? window : this, function factory( Flickity, utils ) {
 
 // -------------------------- sync prototype -------------------------- //
 
 // Flickity.defaults.sync = false;
 
-Flickity.createMethods.push('_createSync');
-
-Flickity.prototype._createSync = function() {
+Flickity.create.sync = function() {
   this.syncers = {};
-  var syncOption = this.options.sync;
+  let syncOption = this.options.sync;
 
   this.on( 'destroy', this.unsyncAll );
 
-  if ( !syncOption ) {
-    return;
-  }
+  if ( !syncOption ) return;
   // HACK do async, give time for other flickity to be initalized
-  var _this = this;
-  setTimeout( function initSyncCompanion() {
-    _this.sync( syncOption );
-  });
+  setTimeout( () => {
+    this.sync( syncOption );
+  } );
 };
+
+let proto = Flickity.prototype;
 
 /**
  * sync
- * @param {Element} or {String} elem
+ * @param {[Element, String]} elem
  */
-Flickity.prototype.sync = function( elem ) {
+proto.sync = function( elem ) {
   elem = utils.getQueryElement( elem );
-  var companion = Flickity.data( elem );
-  if ( !companion ) {
-    return;
-  }
+  let companion = Flickity.data( elem );
+  if ( !companion ) return;
   // two hearts, that beat as one
   this._syncCompanion( companion );
   companion._syncCompanion( this );
@@ -72,12 +56,12 @@ Flickity.prototype.sync = function( elem ) {
 /**
  * @param {Flickity} companion
  */
-Flickity.prototype._syncCompanion = function( companion ) {
-  var _this = this;
+proto._syncCompanion = function( companion ) {
+  let _this = this;
   function syncListener() {
-    var index = _this.selectedIndex;
+    let index = _this.selectedIndex;
     // do not select if already selected, prevent infinite loop
-    if ( companion.selectedIndex != index ) {
+    if ( companion.selectedIndex !== index ) {
       companion.select( index );
     }
   }
@@ -86,27 +70,25 @@ Flickity.prototype._syncCompanion = function( companion ) {
   // hold on to listener to unsync
   this.syncers[ companion.guid ] = {
     flickity: companion,
-    listener: syncListener
+    listener: syncListener,
   };
 };
 
 /**
  * unsync
- * @param {Element} or {String} elem
+ * @param {[Element, String]} elem
  */
-Flickity.prototype.unsync = function( elem ) {
+proto.unsync = function( elem ) {
   elem = utils.getQueryElement( elem );
-  var companion = Flickity.data( elem );
+  let companion = Flickity.data( elem );
   this._unsync( companion );
 };
 
 /**
  * @param {Flickity} companion
  */
-Flickity.prototype._unsync = function( companion ) {
-  if ( !companion ) {
-    return;
-  }
+proto._unsync = function( companion ) {
+  if ( !companion ) return;
   // I love you but I've chosen darkness
   this._unsyncCompanion( companion );
   companion._unsyncCompanion( this );
@@ -115,16 +97,16 @@ Flickity.prototype._unsync = function( companion ) {
 /**
  * @param {Flickity} companion
  */
-Flickity.prototype._unsyncCompanion = function( companion ) {
-  var id = companion.guid;
-  var syncer = this.syncers[ id ];
+proto._unsyncCompanion = function( companion ) {
+  let id = companion.guid;
+  let syncer = this.syncers[ id ];
   this.off( 'select', syncer.listener );
   delete this.syncers[ id ];
 };
 
-Flickity.prototype.unsyncAll = function() {
-  for ( var id in this.syncers ) {
-    var syncer = this.syncers[ id ];
+proto.unsyncAll = function() {
+  for ( let id in this.syncers ) {
+    let syncer = this.syncers[ id ];
     this._unsync( syncer.flickity );
   }
 };
@@ -133,4 +115,4 @@ Flickity.prototype.unsyncAll = function() {
 
 return Flickity;
 
-}));
+} ) );
