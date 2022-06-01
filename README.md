@@ -22,7 +22,7 @@ sync: document.querySelector('.carousel-b')
 // set as an element
 ```
 
-[See demo on CodePen](https://codepen.io/desandro/pen/OPZJmE).
+[See demo on CodePen](https://codepen.io/desandro/pen/gOXEKPK).
 
 ## Install
 
@@ -30,19 +30,19 @@ Add `flickity-sync.js` to your scripts.
 
 ### Download
 
-+ [flickity-sync.js](https://unpkg.com/flickity-sync@2/flickity-sync.js)
++ [flickity-sync.js](https://unpkg.com/flickity-sync@3/flickity-sync.js)
 
 ### CDN
 
 ``` html
-<script src="https://unpkg.com/flickity-sync@2/flickity-sync.js"></script>
+<script src="https://unpkg.com/flickity-sync@3/flickity-sync.js"></script>
 ```
 
 ### Package managers
 
 npm: `npm install flickity-sync`
 
-Bower: `bower install flickity-sync`
+Yarn: `yarn add flickity-sync`
 
 ## Usage
 
@@ -76,26 +76,16 @@ var flktyB = new Flickity('.carousel-b');
 </div>
 ```
 
-### Webpack & Browserify
+### Webpack
 
 ``` js
-var Flickity = require('flickity-sync');
+const Flickity = require('flickity');
+require('flickity-sync');
 
 var flktyA = new Flickity( '.carousel-a', {
   sync: '.carousel-b'
 });
 var flktyB = new Flickity('.carousel-b');
-```
-
-### RequireJS
-
-``` js
-requirejs( [ 'path/to/flickity-sync' ], function( Flickity ) {
-  var flktyA = new Flickity( '.carousel-a', {
-    sync: '.carousel-b'
-  });
-  var flktyB = new Flickity('.carousel-b')
-});
 ```
 
 ---
